@@ -5,7 +5,11 @@ create DATABASE bamazon_DB;
 use bamazon_DB;
 
 CREATE TABLE products(
-
+id int(10),
+productName varchar(30),
+type varchar(30),
+price int(10),
+quantity int(10)
 );
 
 INSERT INTO `products` (`id`, `productName`, `departmentName`, `price`, `stockQuantity`) 

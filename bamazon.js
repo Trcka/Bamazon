@@ -19,7 +19,7 @@ function showTable(){
        console.log("\n");
        console.log('ID    | Product Name | Department | Price | quantity in stock');
        for (var i = 0; i < res.length; i++) {
-          console.log("ID: "+res[i].id + " | " + res[i].productName + " | " + res[i].departmentName + " | " + res[i].price + " | " + res[i].stockQuantity);
+          console.log("ID: "+res[i].id + " | " + res[i].productName + " | " + res[i].type + " | " + res[i].price + " | " + res[i].quantity);
       }
     });
  }
@@ -39,14 +39,14 @@ inquirer.prompt([
     id = user.idSelected;
     quantity = user.quantity;
     console.log(quantity);
-    connection.query('SELECT stockQuantity, productName, price FROM products WHERE id = '+id,
+    connection.query('SELECT quantity, productName, price FROM products WHERE id = '+id,
       function(err, res) {
         if(err) throw err;
-        if (res[0].stockQuantity < quantity) {
+        if (res[0].quantity < quantity) {
           console.log('Sorry you selected more than we have in stock');
         } else {
           connection.query("UPDATE products SET ? WHERE ?", [{
-            stockQuantity: res[0].stockQuantity - quantity
+            quantity: res[0].quantity - quantity
           }, {
                 id: id
             }], function(err, res) {});
